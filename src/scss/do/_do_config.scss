@@ -1,0 +1,140 @@
+/*
+-
+FRAMEWORK DO
+-
+Configuration des variables
+-
+*/
+
+// Transition
+
+$duration: 0.5s;
+$easing: ease-in-out;
+
+// Ratios
+
+$do-u: 0.2;
+$do : 1.61803398875;
+
+$temp-class: ".do"; 
+$count: $do-u;
+$do-directions: "left", "right", "top", "bottom";
+$do-max : 10;  
+
+$do-sizes : (
+  "xxxs"  : 0px,
+  "xxs"   : 0px,
+  "xs"    : 0px,
+  "sm"    : 0px,
+  "md"    : 0px,
+  "lg"    : 0px,
+  "xl"    : 0px,
+  "xxl"   : 0px,
+  "xxxl"  : 0px
+);
+
+$xs: 320px;
+$sm: 576px;
+$md: 768px;
+$lg: 992px;
+$xl: 1200px;
+$xxl: 1400px;
+
+$do-screen : (
+  "sm"      : 576px,
+  "md"      : 768px,
+  "lg"      : 992px,
+  "xl"      : 1200px,
+  "xxl"      : 1600px
+);    
+
+$do-fs: () !default;
+$do-fs: map-merge(
+  (
+    "h1": "lg",
+    "h2": "md",
+    "h3": "sm",
+    "h4": "sm",
+    "h5": "xs",
+    "h6": "xs",
+    "p": "xs",
+    "a": "xs",
+    "input": "xs",
+    "label": "xs",
+    "textarea": "xs",
+    "select": "xs",
+    "span": "xs"  
+  ),
+  $do-fs
+);
+
+$do-paddings : (
+  "p"       : ("props":"padding","unit": 1rem),
+  "px"      : ("props":("padding-left","padding-right"),"unit": 1rem),
+  "py"      : ("props":("padding-top","padding-bottom"),"unit": 1rem),
+  "pt"      : ("props":"padding-top","unit": 1rem),
+  "pb"      : ("props":"padding-bottom","unit": 1rem),
+  "pl"      : ("props":"padding-left","unit": 1rem),
+  "pr"      : ("props":"padding-right","unit": 1rem)
+);
+
+$do-margins : (
+  "m"       : ("props": "margin", "unit": 1rem),
+  "mx"      : ("props": ("margin-left","margin-right"), "unit": 1rem),
+  "my"      : ("props": ("margin-top","margin-bottom"), "unit": 1rem),
+  "mt"      : ("props": "margin-top", "unit": 1rem),
+  "mb"      : ("props": "margin-bottom", "unit": 1rem),
+  "ml"      : ("props": "margin-left", "unit": 1rem),
+  "mr"      : ("props": "margin-right", "unit": 1rem),
+  "mt-n"    : ("props": "margin-top", "unit": -1rem),
+  "mb-n"    : ("props": "margin-bottom", "unit": -1rem),
+  "ml-n"    : ("props": "margin-left", "unit": -1rem),
+  "mr-n"    : ("props": "margin-right", "unit": -1rem)
+);
+
+$do-width-height : (
+  "h"       : ("props" : "height" , "unit": 1rem),
+  "h-100"   : ("props" : "height" , "unit": 1rem),
+  "h-n-100" : ("props" : "height" , "unit": 1rem),
+  "h-px"    : ("props" : "height" , "unit": 1px),
+  "h-vh"    : ("props" : "height" , "unit": 6vh),
+  "w"       : ("props" :"width" , "unit": 1rem),
+  "w-100"   : ("props" :"width" , "unit": 1rem),
+  "w-n-100" : ("props" :"width" , "unit": 1rem),
+  "w-px"    : ("props" :"width" , "unit": 1px),
+  "w-vw"    : ("props" : "height" , "unit": 6vw),
+  "wh"      : ("props" :("width","height"), "unit": 1rem),
+  "hw"      : ("props" :("height","width"), "unit": 1rem)
+);
+
+$do-others : (
+  "br"      : ("props" :"border-radius", "unit": 1rem),
+  "bw"      : ("props" :"border-width", "unit": 1px),
+  "bw-rem"  : ("props" :"border-width", "unit": 1rem),
+  "fs"      : ("props" :"font-size", "unit": 1.4rem),
+  "scale"   : ("props" :"transform", "unit": 1)
+);
+
+$do-clamp : (
+  "px-fluid": ("props" :("padding-left","padding-right"), "unit": 1rem),
+  "py-fluid": ("props" :("padding-top","padding-bottom"), "unit": 1rem),
+  "my-fluid": ("props" :("margin-top","margin-bottom"), "unit": 1rem),
+  "fs-fluid": ("props" :"font-size", "unit": 1rem)
+);
+
+$do-smart : (
+  "px-smart": ("props" :("padding-left","padding-right"), "unit": 1rem),
+  "pl-smart": ("props" :("padding-left"), "unit": 1rem),
+  "pr-smart": ("props" :("padding-right"), "unit": 1rem),
+  "my-smart": ("props" :("margin-top","margin-bottom"), "unit": 1rem),
+  "left-smart": ("props" :("left"), "unit": 1rem),
+  "right-smart": ("props" :("right"), "unit": 1rem)
+);
+
+$do-gogogo: ($do-paddings,$do-margins,$do-width-height,$do-others);
+$do-gogogo-responsive: ($do-paddings,$do-margins,$do-width-height,$do-others);
+
+$do-matrix: ();
+
+
+

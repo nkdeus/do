@@ -1,0 +1,643 @@
+@use 'do_config' as *;
+@use "sass:map";
+
+/*
+-
+FRAMEWORK DO
+-
+Core de la créature
+-
+*/
+// Quelques outils
+
+
+@function rem($px){
+
+  @return strip-unit($px)/$base-font-size * 1rem;
+
+}
+
+@function decimal-round ($number, $digits: 0, $mode: round) {
+    $n: 1;
+    // $number must be a number
+    @if type-of($number) != number {
+        @warn '#{ $number } is not a number.';
+        @return $number;
+    }
+    // $digits must be a unitless number
+    @if type-of($digits) != number {
+        @warn '#{ $digits } is not a number.';
+        @return $number;
+    } @else if not unitless($digits) {
+        @warn '#{ $digits } has a unit.';
+        @return $number;
+    }
+    @if $digits > 0 {
+        @for $i from 1 through $digits {
+            $n: $n * 10;
+        }
+    }
+    @if $mode == round {
+        @return round($number * $n) / $n;
+    } @else if $mode == ceil {
+        @return ceil($number * $n) / $n;
+    } @else if $mode == floor {
+        @return floor($number * $n) / $n;
+    } @else {
+        @warn '#{ $mode } is undefined keyword.';
+        @return $number;
+    }
+}
+
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+  @return $number;
+}
+
+
+
+// DO DO DO !!!
+
+@each $key, $value in $do-sizes {
+  
+  $map: ();
+  $count: decimal-round(strip-unit($count)*$do,3,'round');
+  $value: $count; 
+  $map: map.merge($map,($key: $value));
+  $do-matrix: map.merge($do-matrix,$map) !global;
+
+}
+
+@mixin do-init($prefix,$class,$size,$props,$value,$unit,$important:false) {  
+  
+  $full-class-name : #{$prefix}-#{$class}-#{$size};
+
+  @if $class == "bw" or $class == "bw-rem" {
+    $important : true;
+  }
+
+  #{$full-class-name}{
+
+    @if $class == "scale"{
+      
+      @each $prop in $props {
+
+          #{$prop} : scale(#{$value});
+
+      }  
+      
+    }@else if $class == "w-100" or $class == "h-100" {
+      
+      @each $prop in $props {
+        
+        #{$prop}: calc(100% + #{$value*$unit * 1} );
+        
+      }  
+      
+    }@else if $class == "w-n-100" or $class == "h-n-100" {
+      
+      @each $prop in $props {
+        
+        #{$prop}: calc(100% - #{$value*$unit * 1} );
+        
+      }  
+      
+    }@else{
+      
+      @each $prop in $props {
+
+        @if $important{
+
+          #{$prop} : #{$value*$unit} !important;
+
+        }@else{
+
+          #{$prop} : #{$value*$unit};
+
+        }
+
+      }  
+      
+    }
+    
+    @if $class == "fs"{
+      
+      line-height: 1.5;
+      &.big{
+        font-size:$value*$unit*$do !important;
+      }
+      &.small{
+        font-size:$value*$unit/$do !important;
+      }
+      &.medium{
+        font-size:$value*$unit/1.2 !important;
+      }   
+      &.reset-x{
+        transform: translateX(-0.075em);  
+      }
+      
+    }
+    
+  }
+        
+}
+
+@mixin do-center($class) {
+  #{$class}{
+    left:50%;
+    top:50%;
+    transform:translateY(-50%) translateX(-50%);
+    &-y{
+      top:50%;
+      transform:translateY(-50%);
+    }
+    &-x{
+      top:50%;
+      transform:translateX(-50%);
+    }
+  }
+}
+
+@mixin do-positions($class,$important){
+  #{$class}os{
+    position: sticky;
+  }
+
+  #{$class}of{
+    position: fixed !important;
+    top:0px;
+  }
+
+  #{$class}or{
+    position: relative #{$important};
+  }
+
+  #{$class}oa{
+    position: absolute !important;
+  }
+  
+}
+
+@mixin do-dir($class){
+  
+  @each $direction in $do-directions {
+
+    #{$class}#{$direction}{
+
+      #{$direction}:0%;
+
+      &-start{
+        #{$direction}:0%;
+      }
+      &-middle{
+        #{$direction}:50%;
+      }
+      &-end{
+        #{$direction}:100%;
+      }
+    }
+
+  }
+}
+
+@mixin do-border-type(){
+  @each $direction in $do-directions {
+
+    .do-border-#{$direction}{
+      border-#{$direction}: 1px solid var(--main-color);
+    }
+
+  }
+}
+
+
+
+
+@mixin do-full-dir($key, $class, $value){
+
+
+  @each $direction in $do-directions {
+
+   
+
+    #{$class}#{$direction}{
+
+      &-#{$key}{
+        #{$direction}:$value*1%;
+      }
+
+      &-n-#{$key}{
+        #{$direction}:$value*-1%;
+      }
+
+      &-#{$key}-rem{
+        #{$direction}:$value*1rem;
+      }
+
+      &-n-#{$key}-rem{
+        #{$direction}:$value*-1rem;
+      }
+
+      &-#{$key}-half-rem{
+        #{$direction}:$value/2*1rem;
+      }
+
+    }  
+
+  }
+}
+
+@mixin do-maxo($class){
+
+  
+
+  @for $i from 0 through $do-max {
+
+
+  .#{$class}-o{
+    &-#{$i}{
+      opacity: #{$i/$do-max};
+    }
+  }
+
+  .hover-#{$class}-o{
+
+    &-#{$i}:hover{
+      
+      opacity: #{$i/$do-max};
+
+    }
+       
+  }
+
+  .#{$class}-h{
+    &-#{$i}{
+      height: $i*$do-max*1%;
+    }
+    &-#{$i}-vh{
+      min-height: $i*$do-max*1vh;
+    }
+  }
+
+
+  .#{$class}-w{
+    &-#{$i}{
+      width: $i*$do-max*1%;
+    }
+    &-#{$i}-vw{
+      min-width: $i*$do-max*1vw;
+    }
+    &-#{$i}-max{
+      max-width: $i*$do-max*1%;
+    }
+  }
+
+
+  .#{$class}-z{
+    &-#{$i}{
+      z-index: $i;
+    }
+  }
+
+  .#{$class}-blur{
+
+     &-#{$i}{
+       filter:blur($i*1rem);
+    }
+   
+  }
+
+  .#{$class}-rotation{
+     &-#{$i}{
+       transform:rotate($i*-4.5deg);
+    }
+   
+  }
+
+
+  .#{$class}-shadow{
+
+    &-#{$i}{
+      
+      box-shadow: 0px $i*0.5rem 1rem rgba(black,0.1);
+
+      &-big{
+
+          box-shadow: 0px $i*1rem $i*1rem rgba(black,0.1);
+
+      }
+
+    }
+       
+  }
+
+  .hover-#{$class}-shadow{
+
+    &-#{$i}:hover{
+      
+      box-shadow: 0px $i*0.5rem 1rem rgba(black,0.1);
+
+    }
+       
+  }
+
+  .#{$class}-text-shadow{
+
+    &-#{$i}{
+      
+      text-shadow: 0px $i*0.5rem 1rem rgba(black,0.1);
+
+      &-big{
+
+          text-shadow: 0px $i*1rem $i*1rem rgba(black,0.1);
+
+      }
+
+    }
+       
+  }
+
+}
+
+
+}
+
+
+@mixin do-trans($class) {  
+  #{$class}{
+    &-x-before{
+      transform:translateX(-100%);
+      &-y-before{
+        transform:translateX(-100%) translateY(-100%);
+      }
+      &-y-middle{
+        transform:translateX(-100%) translateY(-50%);
+      }
+      &-y-after{
+        transform:translateX(-100%) translateY(100%);
+      }
+      &-y-push{
+        transform:translateX(-100%) translateY(50%);
+      }
+    }
+    &-x-middle{
+      transform:translateX(-50%);
+      &-y-before{
+        transform:translateX(-50%) translateY(-100%);
+      }
+      &-y-middle{
+        transform:translateX(-50%) translateY(-50%);
+      }
+      &-y-after{
+        transform:translateX(-50%) translateY(100%);
+      }
+      &-y-push{
+        transform:translateX(-50%) translateY(50%);
+      }
+    }
+    &-x-after{
+      transform:translateX(100%);
+      &-y-before{
+        transform:translateX(100%) translateY(-100%);
+      }
+      &-y-middle{
+        transform:translateX(100%) translateY(-50%);
+      }
+      &-y-after{
+        transform:translateX(100%) translateY(100%);
+      }
+      &-y-push{
+        transform:translateX(100%) translateY(50%);
+      }
+    }
+
+    &-y-before{
+      transform:translateY(-100%);
+      &-x-before{
+        transform:translateY(-100%) translateX(-100%);
+      }
+      &-x-middle{
+        transform:translateY(-100%) translateX(-50%);
+      }
+      &-x-after{
+        transform:translateY(-100%) translateX(100%);
+      }
+      &-x-push{
+        transform:translateY(-100%) translateX(50%);
+      }
+    }
+
+    &-y-middle{
+      transform:translateY(-50%);
+      &-x-before{
+        transform:translateY(-50%) translateX(-100%);
+      }
+      &-x-middle{
+        transform:translateY(-50%) translateX(-50%);
+      }
+      &-x-after{
+        transform:translateY(-50%) translateX(100%);
+      }
+      &-x-push{
+        transform:translateY(-50%) translateX(50%);
+      }
+    }
+
+    &-y-after{
+      transform:translateY(100%);
+      &-x-before{
+        transform:translateY(100%) translateX(-100%);
+        transform:translateX(-100%);
+      }
+      &-x-middle{
+        transform:translateY(100%) translateX(-50%);
+      }
+      &-x-after{
+        transform:translateY(100%) translateX(100%);
+      }
+      &-x-push{
+        transform:translateY(100%) translateX(50%);
+      }
+    }
+
+  }
+}
+
+
+
+@mixin do-fluide-class($prefix,$class,$size,$props,$value,$unit){
+ 
+  $full-class-name : #{$prefix}-#{$class}-#{$size};
+
+  #{$full-class-name}{
+    @each $prop in $props {
+        
+        #{$prop}: clamp(#{$value/$do*$unit}, #{$value*0.8vw}, #{$value*$unit} );
+        
+    } 
+  }
+}
+
+@mixin do-smart-class($class,$size,$props,$value,$unit){
+ 
+
+  $full-class-name : ".do-#{$class}-#{$size}";
+ 
+
+  $max : length($do-screen) + 1;
+
+  $smart-value : $value/$max;
+
+  #{$full-class-name}{
+    @each $prop in $props {       
+        #{$prop}: #{$smart-value*$unit};       
+    } 
+  }
+
+  $smart-value : $value;
+
+  @each $break-class, $break-point in $do-screen {
+
+
+
+    $max : $max + -1;
+    $smart-value : decimal-round($value/$max,2);
+
+    //@debug $break-class" :",$full-class-name,$smart-value;
+
+     
+    @media screen and (min-width:$break-point) {
+              
+      #{$full-class-name}{
+        @each $prop in $props {
+            
+            #{$prop}: #{$smart-value*$unit};
+            
+        } 
+      }
+    }
+  }
+}
+
+    
+@each $key, $value in $do-matrix {
+            
+  @each $list in $do-gogogo {
+
+    @each $class-name, $props in $list {
+
+      @include do-init($temp-class,$class-name,$key,map-get($props,"props"),$value,map-get($props,"unit"));
+
+    }   
+
+  }
+            
+  @include do-full-dir($key,".",$value);
+ 
+  @each $class-name, $props in $do-clamp {
+
+      @include do-fluide-class($temp-class,$class-name,$key,map-get($props,"props"),$value,map-get($props,"unit"));
+
+  } 
+
+  @each $class-name, $props in $do-smart {
+
+      @include do-smart-class($class-name,$key,map-get($props,"props"),$value,map-get($props,"unit"));
+
+  } 
+
+}
+
+// Création des choses de base
+
+@include do-positions(".p","");
+@include do-center(".center");
+@include do-trans(".trans");
+@include do-dir(".");
+@include do-border-type();
+@include do-maxo("do");
+
+
+
+
+// Création des choses responsive
+
+@each $break-class, $break-point in $do-screen {
+     
+   @media screen and (min-width:$break-point) {
+              
+     $temp-class: ".#{$break-class}-do";   
+
+     @include do-positions(".#{$break-class}-p","!important");
+     @include do-center(".#{$break-class}-center");
+     @include do-trans(".#{$break-class}-trans");
+     @include do-dir(".#{$break-class}-");
+     @include do-maxo("#{$break-class}-do");
+     //@include do-colors(".#{$break-class}-");
+
+     @each $key, $value in $do-matrix {
+                  
+       @each $list in $do-gogogo-responsive {
+         
+         @each $class-name, $props in $list {
+
+           @include do-init($temp-class,$class-name,$key,map-get($props,"props"),$value,map-get($props,"unit"),true);
+
+         }
+       }  
+       
+       @include do-full-dir($key,".#{$break-class}-",$value);
+     }
+
+
+   }        
+}
+
+
+// Taille de la police
+
+
+
+@each $fs, $value in $do-fs {
+
+  #{$fs} {
+
+    $tempSize: map.get($do-matrix,$value);
+    @debug($fs,$tempSize);
+    font-size:$tempSize*1rem;
+  
+    &.big{
+      font-size:$tempSize*1rem*$do !important;
+    }
+    &.small{
+      font-size:$tempSize*1rem/$do !important;
+    }
+    &.medium{
+      font-size:$tempSize*1rem/1.2 !important;
+    }   
+    &.reset-x{
+      transform: translateX(-0.075em);
+    }
+
+    @if($tempSize < 1){
+      @media screen and (max-width:$md) {
+        font-size:16px;
+      }  
+    }
+
+
+    &.uppercase{
+      text-transform: uppercase;
+    }
+    &.press{
+      line-height: 1.1;
+    }
+
+  }
+  
+}
+
+
+

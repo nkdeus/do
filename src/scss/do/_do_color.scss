@@ -1,0 +1,110 @@
+@use "sass:color";
+/*
+-
+FRAMEWORK DO
+-
+Les couleurs !!!
+-
+*/
+
+
+
+$mainColor: #de1836;
+$secondColor: #dbcbcb;
+$contrasteColor: #363333;
+$extraColor: complement($mainColor);
+$wtf: #ffffff;
+$colorsVarMax: 2;
+$colorsAdjustDark: 10%;
+$colorsAdjustLight: 10%;
+$colorsVar: (
+  main: $mainColor,
+  second: $secondColor,
+  contraste: $contrasteColor,
+  extra: $extraColor,
+  wtf:$wtf
+);
+
+
+@mixin do-color-full-class($class, $color) {  
+  #{$class}-bg-#{$color}-color{
+    background-color:  var(--#{$color}-color) !important;
+  }
+  #{$class}-bg-#{$color}-n-color{
+    background-color:  var(--#{$color}-n-color) !important;
+  }
+  #{$class}-fill-#{$color}-color{
+    fill:  var(--#{$color}-color) !important;
+  }
+  #{$class}-stroke-#{$color}-color{
+    stroke:  var(--#{$color}-color) !important;
+    path{
+      stroke:  var(--#{$color}-color) !important;
+    }
+  }
+  #{$class}-border-#{$color}-color{
+    border-color:  var(--#{$color}-color);
+  }
+  #{$class}-txt-#{$color}-color{
+    color:  var(--#{$color}-color);
+  }
+}
+
+@mixin do-color-extend($colorName,$color) {  
+
+    //--#{$color}: #{$color};
+    //--#{$color}-color: var(--main);
+    @debug("--> "--#{$colorName} ':' #{$color});
+
+    :root{
+      --#{$colorName}:#{$color};
+      --#{$colorName}-color:var(--#{$colorName});
+    } 
+    
+
+    [data-do-bg='#{$colorName}'] {
+      background-color: var(--#{$colorName}-color) !important; 
+    }
+    
+    [data-do-txt='#{$colorName}'] {
+      color: var(--#{$colorName}-color) !important; 
+    }
+
+}
+
+@each $colorName, $colorVar in $colorsVar  {
+
+  @include do-color-extend($colorName,$colorVar);
+  @include do-color-full-class('.do', $colorName);
+
+  @for $o from 1 through $colorsVarMax {
+
+
+    $tempColorLight:color.scale($colorVar,$lightness: $o*$colorsAdjustLight);
+   
+    $tempColorDark:color.scale($colorVar,$lightness: $o*$colorsAdjustDark*-1);  
+
+    @include do-color-extend($colorName+$o,$tempColorDark);
+    @include do-color-full-class('.do', $colorName+$o);
+    @include do-color-extend($colorName+$o+#{-n},$tempColorLight);
+    @include do-color-full-class('.do', $colorName+$o+#{-n});
+
+  }
+
+  @each $colorName2, $colorVar2 in $colorsVar  {  
+    @if($colorName2 != $colorName){    
+      [data-set-#{$colorName}='#{$colorName2}'], .set-#{$colorName}-#{$colorName2}{
+        --#{$colorName}-color: var(--#{$colorName2}) !important; 
+      }
+      [data-do="#{$colorName}-#{$colorName2}"]{
+        background-color: var(--#{$colorName}-color) !important;
+        color: var(--#{$colorName2}-color) !important;
+      }
+      [data-do-hover="#{$colorName}-#{$colorName2}"]:hover{
+        background-color: var(--#{$colorName}-color) !important;
+        color: var(--#{$colorName2}-color) !important;
+      }
+    }
+  }
+  
+}

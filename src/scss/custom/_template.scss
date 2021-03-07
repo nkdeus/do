@@ -1,0 +1,111 @@
+// TPL global
+
+body{
+	background-color: white;
+	margin:0;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+
+.container-fluid{
+	position: relative;
+	padding:0px;
+
+}
+
+.section{
+	
+	width: 100%;
+	position: relative;
+
+	@extend .do-px-smart-xxxl;
+
+	&.reset{
+		margin-left:0px;
+		margin-right:0px;
+		>div[class^="col-"] {
+			padding-left: 0px;
+			padding-right: 0px;
+		}
+	}
+
+
+	@media screen and (max-width:$lg) {
+		
+		&.lgd-reset{
+			margin-left:0px;
+			margin-right:0px;
+			>div[class^="col-"] {
+				padding-left: 0px;
+				padding-right: 0px;
+			}
+		}
+		
+	}
+
+	&.full{
+		padding-left:0px;
+		padding-right:0px;
+	}
+
+	&.crop{
+		overflow: hidden;
+	}
+
+	&.push{
+		position: relative;
+		z-index: 1;
+	}
+
+		
+}
+
+// BOOTSTRAP UTILS
+
+.reset-cols{
+	>div[class^="col-"] {
+		padding: 0px;
+	}
+}
+.reset-all-cols{
+	div[class^="col-"] {
+		padding: 0px;
+	}
+}
+.auto-cols-12{
+
+	@media screen and (max-width:$md) {
+		>div[class^="col-"] {
+			flex: 0 0 100%;
+    		max-width: 100%;
+		}	
+	}
+}
+
+
+
+// BG IMAGE & BLEND
+
+
+.blend-color{
+	 mix-blend-mode: color;
+}
+
+.bg-center{
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.bg-top-center{
+	background-position: 50% -10rem;
+	background-repeat: no-repeat;
+	background-size: 100%;
+}
+
+
+
+

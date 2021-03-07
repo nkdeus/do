@@ -1,0 +1,75 @@
+/*
+-
+FRAMEWORK DO
+-
+Tweens système
+-
+*/
+
+*[class^="tween-"] {
+	transition:all 0.3s ease-out;
+}
+
+
+.a-transform{
+  transition:transform 0.4s ease-out;
+}
+
+.fx-target-scale{
+	@extend .a-transform;
+}
+
+.fx-trigger-scale:hover{
+	.fx-target-scale{
+		transform:rotate(-45deg) scale(1.2);
+	}
+}
+
+
+.a-opacity{
+  transition:opacity 0.3s ease-out;
+}
+
+.fx-target-opacity, .fx-target-opacity-0{
+	@extend .a-opacity;
+}
+
+.fx-trigger-opacity:hover{
+	.fx-target-opacity{
+		opacity: 1;
+	}
+}
+
+
+.fx-trigger-opacity-0:hover{
+	.fx-target-opacity-0{
+		opacity: 0;
+	}
+}
+
+.fx-target-roll{
+
+	
+}
+
+@keyframes tween-roll {
+  0% {
+  	opacity: 0;
+    transform:translateY( -100% );  
+  }
+  50% {
+  	opacity: 1;
+    transform:translateY( 0% );  
+  }
+  100% {
+    transform:translateY( 200% ); 
+    opacity: 0;
+  }
+}
+
+
+.fx-trigger-roll:hover{
+	.fx-target-roll{
+		animation: 1s linear 0s infinite tween-roll;
+	}
+}

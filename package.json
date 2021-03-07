@@ -21,5 +21,8 @@
   "devDependencies": {
     "parcel-bundler": "1.12.3",
     "sass": "^1.32.8"
+  },
+  "dependencies": {
+    "compass": "^0.1.1"
   }
 }

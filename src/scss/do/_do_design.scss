@@ -1,0 +1,461 @@
+@use 'do_config' as *;
+/*
+-
+FRAMEWORK DO
+-
+Easy design !
+-
+*/
+
+
+
+
+// Quelques outils
+
+// @include underline($beige, black, $sombre, 2px, 0px, 1);
+@mixin underline($color,$hoverColor,$activeColor, $height, $bottom, $opacity) {
+  position: relative;
+  color:$color;
+
+  &:before {
+    content:"";
+    display: block;
+    position: absolute;
+    bottom:$bottom;
+    width:100%;
+    left:0px;
+    height: $height;
+    background-color: $color;
+    transform-origin: top right;
+    transform: scaleX(0);
+    opacity: $opacity;
+    transition: transform 0.3s ease-in-out, opacity 1s ease-out, background-color 1s ease-in-out;
+  }
+  &:hover{
+    color:$hoverColor;    
+    &:before{
+      background-color:$hoverColor;
+      transform-origin: top center;
+      transform: scaleX(1);
+      opacity: 1;
+    }
+  }
+  &.active{
+    color:$activeColor;
+    &:before{
+      background-color: rgba($activeColor,1);
+      transform: scaleX(1);
+      opacity: 1;
+    }
+  }
+}
+
+
+
+
+// @include aspect-ratio(16, 9);
+// @include aspect-ratio(1, 1);
+@mixin aspect-ratio($width, $height) {
+  position: relative;
+  &:before {
+    display: block;
+    content: "";
+    width: 100%;
+    padding-top: ($height / $width) * 100%;
+  }
+  > .content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    &.gutter{
+      top: 15px;
+      left: 15px;
+      width: calc(100% - 30px);
+      height: calc(100% - 30px);     
+    }
+  }
+}
+
+.square{
+ 
+      @include aspect-ratio(1,1);
+      &.circle{
+        border-radius: 100%;
+      }
+  
+}
+
+.cover{
+
+  @include aspect-ratio(3.5,2);
+  .content{
+    background-size: cover;
+  }
+
+}
+
+.video{
+  @include aspect-ratio(16,9);
+}
+
+
+// DO-BT : big small line underline 
+
+.do-bt{
+  display: inline-block;
+  position: relative;
+  
+  background-color:  var(--main-color);
+
+  &.transparent{
+     background-color:  transparent;
+  }
+
+  &.crop{
+    overflow: hidden;
+  }
+  
+ 
+  @extend .do-px-sm !optional;
+  @extend .do-py-xs !optional;
+
+  span,i:before{
+    z-index: 1;
+    position: relative;
+    text-transform: uppercase;
+    color: var(--second-color);
+  }
+
+  &.rounded{
+     @extend .do-br-md !optional;
+  }
+
+  &.big{
+    span,i:before{
+      @extend .do-fs-sm !optional;  
+    }
+    
+    @extend .do-br-lg !optional;
+    @extend .do-p-md !optional;
+    &:before{
+      @extend .do-br-lg !optional;
+    }
+  }
+
+
+  &.small{
+    span,i:before{
+      @extend .do-fs-xs !optional;  
+    }
+    
+ 
+    @extend .do-py-xxs !optional;
+    @extend .do-px-xs !optional;
+
+    &.underline{
+      &:before{
+        @extend .bottom-xxs-rem !optional;
+      }
+    }
+  
+      i,i:before{
+        
+        @media screen and (max-width:$md) {
+           font-size:14px  !important;
+        }  
+        @media screen and (max-width:$sm) {
+           font-size:14px  !important;
+        }
+
+      }
+  }
+
+  &:before{
+    content: "";
+    z-index: 0;
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top:0px;
+    left:0px;
+    background-color: rgba(white,1);
+    mix-blend-mode: overlay;
+
+    transform:scale(1.2);
+    opacity: 0;
+    transition:opacity 0.2s, transform 0.4s;
+  }
+
+  &:hover{
+    //background-color: var(--contraste-color);
+    span,i:before{
+      color: var(--second-color) !important;
+    }
+    &:before{
+      opacity: 0.9;
+      transform:scale(0.95);
+    }
+  }
+
+  &.no-event{
+    pointer-events:none;
+  }
+
+  &.circle{
+    border-radius:100%;
+     &:before{
+      border-radius:100%;
+    }
+  }
+
+  &.line{
+    background-color: transparent;
+    border:1px solid var(--main-color);
+    span,i:before{
+        color: var(--main-color);
+    }
+    &:hover{
+        background-color: var(--main-color);
+        span,i:before{
+          color: var(--second-color) !important;
+
+        }
+    }
+  }
+
+  &.underline{
+    background-color: transparent;
+    padding-left: 0px;
+    padding-right: 0px;
+    overflow: visible;
+    span,i:before{
+        color: var(--main-color) !important;
+    }
+    &:before {
+      z-index: 0;
+      border-radius: 0px;
+      content:"";
+      display: block;
+      position: absolute;
+      top:auto;
+      @extend .bottom-xs-rem !optional;
+      width:100%;
+      left:0px;
+      height: 1px;
+      background-color: var(--main-color);
+      transform-origin: top right;
+      transform: scaleX(0);
+      mix-blend-mode:unset;
+      opacity: 0;
+      transition: transform 0.3s ease-in-out, opacity 1s ease-out, background-color 1s ease-in-out;
+    }
+
+
+
+    &.on{
+
+      &:before {
+       opacity: 1;
+       transform:scaleX(1);
+      }
+
+      &:hover{
+        &:before {
+          opacity: 0;
+          transform:scaleX(0);
+        }
+      }
+
+    }
+    
+    &.active{
+      @extend .set-main-second !optional;
+      @extend .set-second-contraste !optional;
+      &:before{
+        opacity: 0;
+        transform:scaleX(1);
+        transform-origin:top left;
+      }
+      span,i:before{
+        font-weight: 500;
+        color: var(--main-color);
+      }
+    }
+
+    &:hover{
+      &:before{
+        opacity: 1;
+        transform:scaleX(1);
+        transform-origin:top left;
+      }
+    }
+
+    &.press{
+        @extend .do-py-xxs !optional;
+        &:before{
+          @extend .bottom-xxs-rem !optional;
+        }
+    }
+  }
+
+ 
+}
+
+// DO DIV
+
+.do-div{
+
+  &.round{
+    @extend .do-br-md !optional;
+    &.focus{
+      &:after{
+         @extend .do-br-md !optional;
+      }
+    }
+  }
+
+  &.transparent{
+    background-color: transparent;
+  }
+
+  &.crop{
+    overflow: hidden;
+  }
+
+
+  &.z{
+    &-before{
+      z-index: -1;
+    }
+    &-after{
+      z-index: 1;
+    }
+  }
+
+  &.line{
+    background-color: transparent;
+    border:1px solid black;
+    @extend .do-border-main-color !optional;
+  }
+
+  &.square{
+    @include aspect-ratio(1,1);
+  }
+
+  &.circle{
+    @include aspect-ratio(1,1);
+    border-radius: 100%;
+    &.focus{
+      &:after{
+         border-radius: 100%;
+      }
+    }
+  }
+
+  &.focus{
+    &:after{
+      content:"";
+      z-index: 0;
+      display:block;
+      pointer-events:none;
+      position: absolute;
+      top:0rem !important;
+      left:0rem !important;
+      width: calc(100% + 0rem);
+      height: calc(100% + 0rem);
+      transform-origin:center;
+      opacity: 0.3;
+
+      @extend .poa !optional;
+      //@extend .do-scale-center-sm;
+      @extend .do-bw-lg !optional;
+      border:1px solid black;
+    @extend .do-border-main-color !optional;
+    }
+
+  }
+
+}
+
+
+a.decoration-underline{
+  text-decoration: underline;
+}
+
+// form
+
+input{
+
+  transition-property: background-color, color;
+  transition-duration: $duration/2;
+  transition-timing-function: $easing;
+
+  &.reset{
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    background-color: transparent !important;
+    border: none;
+  }
+  &.app{
+    appearance: none;
+  }
+  opacity: 0.8;
+  &:focus{
+    opacity: 1;
+  }
+
+  &.full{
+    width: 100%;
+    height: 100%;
+  }
+
+  &.no-focus{
+    &:focus{
+      border:none;
+      appearance: none;
+      outline: none;
+      filter:none;
+    }
+  }
+
+}
+
+// Transition
+
+$duration: 0.5s;
+$easing: ease-in-out;
+
+// opacity
+
+.o-half{
+  opacity: 0.5;
+  &:hover{
+    opacity: 1;
+  }
+}
+
+// FLex center
+
+.fc{
+  display: flex;
+  align-items: center!important;
+  justify-content: center!important;
+
+}
+
+
+// display
+
+.db{
+  display: block;
+}
+
+.dib{
+  display: inline-block;
+}
