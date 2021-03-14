@@ -20703,4 +20703,34 @@ ul li {
   white-space: nowrap;
 }
 
+body {
+  background-color: var(--second-color);
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.container-fluid {
+  position: relative;
+  padding: 0px;
+}
+
+.blend-color {
+  mix-blend-mode: color;
+}
+
+.bg-center {
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.bg-top-center {
+  background-position: 50% -10rem;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
 /*# sourceMappingURL=/main.77bb5cfd.css.map */
