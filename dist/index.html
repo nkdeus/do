@@ -8,14 +8,22 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/main.77bb5cfd.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/ScrollTrigger.min.js"></script>
+    <script type="text/javascript" src="https://rawcdn.githack.com/nkdeus/up/49746865f780fc2b79bbab2c445beaff86d4bb52/do-wf-modules.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
 <script src="/main.77bb5cfd.js"></script></head>
 <body class="">
-    <nav class="do-w-10 pof do-px-smart-xxl do-py-xxs" data-do-bg="second">
-        <ul class="flex">
-            <li><a href="">BT</a></li>
-            <li><a href="">BT</a></li>
-        </ul>
-    </nav>
+    <div id="nav" class="do-w-10 pof do-px-smart-xxl do-py-xxs do-z-8" data-do-bg="second">
+        <nav class="">
+            <ul class="flex">
+                <li><a href="">BT</a></li>
+                <li><a href="">BT</a></li>
+            </ul>
+        </nav>
+    </div>
+
     <section class="do-h-10-vh do-px-smart-xxl flex flex-center-y por" data-do-bg="main" style="background-image: url(/bg.729c392d.jpg);">
         
         <!--<div class="poa do-w-10 do-h-10 top left do-z-0 overflow-hidden" style="filter: blur(0px);">
@@ -24,19 +32,55 @@
         
         </div>-->
 
-        <div class="poa top left do-w-8 lg-do-w-5 do-h-10 left blur-doux do-z-1" data-do-bg="second"></div>
+        <div class="poa top left do-w-8 lg-do-w-5 do-h-10 left blur-doux do-z-1">
+            <div class="poa do-w-10 do-h-10 top left do-o-4" data-do-bg="second"></div>
+        </div>
 
 
        
-        <div class="content por do-w-8 lg-do-w-5 do-p-md do-z-2">
+        <div class="content por do-w-8 lg-do-w-5 do-pr-md do-z-2">
             <h1 class="reset-y">
                 <img class="por do-w-xxxl" src="/logo.8bee2099.svg" alt="NED Nouvelle Energies Distribution">
             </h1>
             <p class="big do-my-lg do-pr-lg">Nous sommes expert de la distribution de solutions en énergies  renouvelables auprès des professionnels.</p>
-            <a href="" class="do-p-sm inline-block" data-do-hover="contraste-second" data-do="main-second">CATALOGUE</a>
+            <a href="" class="do-p-sm inline-block" data-do-hover="contraste-main" data-do="main-contraste">CATALOGUE</a>
         </div>
         
 
     </section>
+
+    <script>
+        /* End Head code */
+        
+        
+        window.togglesKey = {};
+        window.doautotheme = null;
+        
+        $( document ).ready(function() {
+          
+            
+          /* Start Footer Code */
+          $('[data-module]').each((i, el) => {
+            console.log("#module",el.dataset.module);
+           
+            if(el.dataset.module == "dotheme"){
+              if(window.dothemes == null){
+                window.dothemes = []
+              }
+              window.dothemes.push(window.WFmodules[el.dataset.module].call(el))
+            }else{
+               window.WFmodules[el.dataset.module].call(el);
+            }
+        
+          });
+          
+         
+          
+        
+          /* End Footer Code */
+        });
+        
+        
+        </script>
 </body>
 </html>

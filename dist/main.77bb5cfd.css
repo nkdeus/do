@@ -20459,6 +20459,7 @@ body {
 
 .blur-doux {
   backdrop-filter: blur(1rem);
+  -webkit-backdrop-filter: blur(1rem);
 }
 
 .bg-center {
