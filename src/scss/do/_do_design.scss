@@ -104,6 +104,11 @@ Easy design !
 
 // DO-BT : big small line underline 
 
+%test {
+  padding:2rem;
+}
+
+
 .do-bt{
   display: inline-block;
   position: relative;
@@ -118,7 +123,7 @@ Easy design !
     overflow: hidden;
   }
   
- 
+  @extend %test;
   @extend .do-px-sm !optional;
   @extend .do-py-xs !optional;
 

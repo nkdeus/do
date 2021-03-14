@@ -9,11 +9,10 @@ Les couleurs !!!
 
 
 
-$mainColor: #de1836;
-$secondColor: #dbcbcb;
-$contrasteColor: #363333;
+$mainColor: #c9d200;
+$secondColor: #f1f1f1;
+$contrasteColor: #3e3d40;
 $extraColor: complement($mainColor);
-$wtf: #ffffff;
 $colorsVarMax: 2;
 $colorsAdjustDark: 10%;
 $colorsAdjustLight: 10%;
@@ -21,8 +20,7 @@ $colorsVar: (
   main: $mainColor,
   second: $secondColor,
   contraste: $contrasteColor,
-  extra: $extraColor,
-  wtf:$wtf
+  extra: $extraColor
 );
 
 
