@@ -1,7 +1,7 @@
 {
-  "name": "do",
+  "name": "ned",
   "version": "1.0.0",
-  "description": "Framework SCSS",
+  "description": "NED !",
   "main": "src/index.js",
   "scripts": {
     "start": "parcel src/*.html",
@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nkdeus/do.git"
+    "url": "git+https://github.com/nkdeus/ned.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/nkdeus/do/issues"
+    "url": "https://github.com/nkdeus/ned/issues"
   },
-  "homepage": "https://github.com/nkdeus/do#readme",
+  "homepage": "https://github.com/nkdeus/ned#readme",
   "devDependencies": {
     "parcel-bundler": "1.12.3",
     "sass": "^1.32.8"
