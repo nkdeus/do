@@ -15,22 +15,32 @@
             crossorigin="anonymous"></script>
 </head>
 <body class="">
-    <div id="nav" class="do-w-10 pof do-px-smart-xxl do-py-xxs do-z-8" data-do-bg="second">
-        <nav class="">
+    <div id="nav" class="do-w-10 pof do-px-smart-xxl do-z-8 flex flex-center-y" data-do-bg="second2-n">
+        <nav class="nav-container">
             <ul class="flex">
-                <li><a href="">BT</a></li>
-                <li><a href="">BT</a></li>
+                <li><a href="" class="do-py-sm do-mr-sm block">CATALOGUE</a></li>
+                <li><a href="" class="do-py-sm do-mr-sm block">CATALOGUE</a></li>
             </ul>
         </nav>
+  
+
+        <div data-module="dotoggle" data-global="true" data-bt-toggle-add="active,.nav-container,close" id="burger" class="do-h-md do-w-md flex flex-center" data-do-hover="main-second">
+            <svg xmlns="http://www.w3.org/2000/svg" 
+            height="24px" viewBox="0 0 24 24" width="24px"
+            fill="#3e3d40">
+            <path d="M0 0h24v24H0V0z" fill="none"/>
+            <path class="do-fill-contraste-color" d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+            </svg>
+        </div>
     </div>
 
-    <section class="do-h-10-vh do-px-smart-xxl flex flex-center-y por" data-do-bg="main" style="background-image: url(imgs/photos/bg.jpg);">
+    <section class="do-h-10-vh do-px-smart-xxl flex flex-center-y por" data-do-bg="main">
         
-        <!--<div class="poa do-w-10 do-h-10 top left do-z-0 overflow-hidden" style="filter: blur(0px);">
+     <div class="poa do-w-10 do-h-10 top left do-z-0 overflow-hidden" style="filter: blur(0px);">
             <img class="do-w-10 do-h-10 por do-z-1" style="object-fit: cover;"  src="/imgs/photos/bg.jpg"
-            alt="Elephant at sunset">
+            alt="bg">
         
-        </div>-->
+        </div>
 
         <div class="poa top left do-w-8 lg-do-w-5 do-h-10 left blur-doux do-z-1" >
             <div class="poa do-w-10 do-h-10 top left do-o-4" data-do-bg="second"></div>
@@ -48,5 +58,30 @@
         
 
     </section>
+
+    <script>
+
+        window.togglesKey = {};
+        window.doautotheme = null;
+        
+        $( document ).ready(function() {
+          
+          $('[data-module]').each((i, el) => {
+            console.log("#module",el.dataset.module);
+           
+            if(el.dataset.module == "dotheme"){
+              if(window.dothemes == null){
+                window.dothemes = []
+              }
+              window.dothemes.push(window.WFmodules[el.dataset.module].call(el))
+            }else{
+               window.WFmodules[el.dataset.module].call(el);
+            }
+        
+          });
+          
+        });
+   
+        </script>
 </body>
 </html>

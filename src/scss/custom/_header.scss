@@ -1,107 +1,64 @@
 
-.a-transform{
-  transition:transform 0.4s ease-out, left 0.4s ease-out, transform-origin 0.4s ease-out, opacity 0.4s ease-out;
-}
-.o-transform{
-  transition:opacity 0.4s ease-out;
-}
-
-.h-transform{
-  transition:height 0.4s ease-out;
+#burger{
+  border-radius:100%;
+  &.active{
+    transform:scale(1.2);
+  }
 }
 
-.progress{
+#nav{
 
-    @extend .a-transform;
-    transform:scaleX( 1 );
-    transform-origin:top right;
-    transform:scaleX( calc( 1 - var(--scroll-percent-y) ) );    
-
-}
-
-
-#bg-header{
-
-   transform:translateY(-100%);
-   transform-origin:top center;
-   @extend .a-transform;
-
-}
-
-.logo-icone{
-  display: none;
-}
-
-
-.container-main{
-
-  @extend .h-transform;
-  @extend .do-py-md; 
-}
-
-
-@media screen and (max-width:$lg) {
-  .sub-nav{
-    span{
-      display:none;
+  .nav-container{
+    &.close{
+      display: none;
     }
   }
-} 
+}
 
+#nav a{
+  position: relative;
+  &::after{
+ 
+      content: "";
+      z-index: 0;
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      bottom:0px;
+      left:0px;
+      background-color: var(--main-color);
+      transform:scale(0);
+      opacity: 0;
+      transition:opacity 0.2s, transform 0.4s;
 
-body.onScroll {
+    }
 
-    .container-main{
+    &::before{
+ 
+      content: "";
+      z-index: -1;
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      bottom:0px;
+      left:0px;
+      background-color: rgb(255, 255, 255);
+      transform:scale(0.9);
+      opacity: 0;
+      transition:opacity 0.2s, transform 0.4s;
 
-        height: 5rem;
-        padding-top: 0px;
-        padding-bottom: 0px;
-        --main-color: #000;
+    }
+  &:hover{
     
+    &::after{
+      opacity: 1;
+      transform:scale(1);
     }
-
-    .main-nav{
-        --second-color: #000 !important;
-    }
-
-    #bg-header{
-       opacity: 1;
-       transform:translateY(0%);
-    }
-
-    .logo-icone{
-      display: block;
-    }
-
-    .sub-nav{
-      @extend .top-xs-rem;
-    }
-
-
-    .logo-full{
-      display: none;
-    }
-
-    .fx-bg:after{
-      transform-origin:top left;
-    }
-}
-
-.toggle{
-  &-off{
-    .on{
-      display: block;
-    }
-    .off{
-      display: none;
-    }
-  }
-  &-on{
-    .off{
-      display: block;
-    }
-    .on{
-      display: none;
+    &::before{
+      opacity: 1;
+      transform:scale(1.2);
     }
   }
 }
