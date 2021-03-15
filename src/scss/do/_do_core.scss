@@ -73,12 +73,13 @@ Core de la créature
 @mixin do-init($prefix,$class,$size,$props,$value,$unit,$important:false) {  
   
   $full-class-name : #{$prefix}-#{$class}-#{$size};
+  $extend-class-name : #{$class}-#{$size};
 
   @if $class == "bw" or $class == "bw-rem" {
     $important : true;
   }
 
-  #{$full-class-name}{
+  #{$full-class-name},%#{$extend-class-name}{
 
     @if $class == "scale"{
       
@@ -605,7 +606,7 @@ Core de la créature
   #{$fs} {
 
     $tempSize: map.get($do-matrix,$value);
-    @debug($fs,$tempSize);
+   // @debug($fs,$tempSize);
     font-size:$tempSize*1rem;
   
     &.big{
