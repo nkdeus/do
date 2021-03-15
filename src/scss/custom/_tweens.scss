@@ -11,12 +11,26 @@ Tweens système
 }
 
 
-.a-transform{
+// opacity
+
+.o-half{
+  opacity: 0.5;
+  &:hover{
+    opacity: 1;
+  }
+}
+
+
+%a-transform{
   transition:transform 0.4s ease-out;
 }
 
+%a-opacity{
+	transition:opacity 0.4s ease-out;
+  }
+
 .fx-target-scale{
-	@extend .a-transform;
+	@extend %a-transform;
 }
 
 .fx-trigger-scale:hover{
@@ -31,7 +45,7 @@ Tweens système
 }
 
 .fx-target-opacity, .fx-target-opacity-0{
-	@extend .a-opacity;
+	@extend %a-opacity;
 }
 
 .fx-trigger-opacity:hover{
@@ -45,11 +59,6 @@ Tweens système
 	.fx-target-opacity-0{
 		opacity: 0;
 	}
-}
-
-.fx-target-roll{
-
-	
 }
 
 @keyframes tween-roll {

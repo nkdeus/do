@@ -1,8 +1,12 @@
+@use '../do/do_core' as *;
+@use '../do/do_color' as *;
 // TPL global
 
+@debug("TEMPLATE !");
+
 body{
-	background-color: var(--second-color);
-	margin:0;
+	@extend %mt-xxxl;
+	@extend %bg-second-color;
 }
 
 *{
@@ -11,32 +15,12 @@ body{
 
 
 .container-fluid{
-	   position: relative;
+	position: relative;
 	padding:0px;
 }
 
 
 
-
-
-// BG IMAGE & BLEND
-
-
-.blend-color{
-	 mix-blend-mode: color;
-}
-
-.bg-center{
-	background-position: 50% 50%;
-	background-repeat: no-repeat;
-	background-size: cover;
-}
-
-.bg-top-center{
-	background-position: 50% -10rem;
-	background-repeat: no-repeat;
-	background-size: 100%;
-}
 
 
 

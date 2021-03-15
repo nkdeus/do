@@ -27,7 +27,7 @@ $colorsVar: (
 
 
 @mixin do-color-full-class($class, $color) {  
-  #{$class}-bg-#{$color}-color{
+  #{$class}-bg-#{$color}-color,%bg-#{$color}-color{
     background-color:  var(--#{$color}-color) !important;
   }
   #{$class}-bg-#{$color}-n-color{
@@ -54,7 +54,7 @@ $colorsVar: (
 
     //--#{$color}: #{$color};
     //--#{$color}-color: var(--main);
-    @debug("--> "--#{$colorName} ':' #{$color});
+    //@debug("--> "--#{$colorName} ':' #{$color});
 
     :root{
       --#{$colorName}:#{$color};
