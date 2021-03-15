@@ -19989,212 +19989,6 @@ Easy design !
   height: calc(100% - 30px);
 }
 
-.do-bt {
-  padding: 2rem;
-}
-
-.do-bt {
-  display: inline-block;
-  position: relative;
-  background-color: var(--main-color);
-}
-.do-bt.transparent {
-  background-color: transparent;
-}
-.do-bt.crop {
-  overflow: hidden;
-}
-.do-bt span, .do-bt i:before {
-  z-index: 1;
-  position: relative;
-  text-transform: uppercase;
-  color: var(--second-color);
-}
-@media screen and (max-width: 768px) {
-  .do-bt.small i, .do-bt.small i:before {
-    font-size: 14px !important;
-  }
-}
-@media screen and (max-width: 576px) {
-  .do-bt.small i, .do-bt.small i:before {
-    font-size: 14px !important;
-  }
-}
-.do-bt:before {
-  content: "";
-  z-index: 0;
-  display: block;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0px;
-  left: 0px;
-  background-color: white;
-  mix-blend-mode: overlay;
-  transform: scale(1.2);
-  opacity: 0;
-  transition: opacity 0.2s, transform 0.4s;
-}
-.do-bt:hover span, .do-bt:hover i:before {
-  color: var(--second-color) !important;
-}
-.do-bt:hover:before {
-  opacity: 0.9;
-  transform: scale(0.95);
-}
-.do-bt.no-event {
-  pointer-events: none;
-}
-.do-bt.circle {
-  border-radius: 100%;
-}
-.do-bt.circle:before {
-  border-radius: 100%;
-}
-.do-bt.line {
-  background-color: transparent;
-  border: 1px solid var(--main-color);
-}
-.do-bt.line span, .do-bt.line i:before {
-  color: var(--main-color);
-}
-.do-bt.line:hover {
-  background-color: var(--main-color);
-}
-.do-bt.line:hover span, .do-bt.line:hover i:before {
-  color: var(--second-color) !important;
-}
-.do-bt.underline {
-  background-color: transparent;
-  padding-left: 0px;
-  padding-right: 0px;
-  overflow: visible;
-}
-.do-bt.underline span, .do-bt.underline i:before {
-  color: var(--main-color) !important;
-}
-.do-bt.underline:before {
-  z-index: 0;
-  border-radius: 0px;
-  content: "";
-  display: block;
-  position: absolute;
-  top: auto;
-  width: 100%;
-  left: 0px;
-  height: 1px;
-  background-color: var(--main-color);
-  transform-origin: top right;
-  transform: scaleX(0);
-  mix-blend-mode: unset;
-  opacity: 0;
-  transition: transform 0.3s ease-in-out, opacity 1s ease-out, background-color 1s ease-in-out;
-}
-.do-bt.underline.on:before {
-  opacity: 1;
-  transform: scaleX(1);
-}
-.do-bt.underline.on:hover:before {
-  opacity: 0;
-  transform: scaleX(0);
-}
-.do-bt.underline.active:before {
-  opacity: 0;
-  transform: scaleX(1);
-  transform-origin: top left;
-}
-.do-bt.underline.active span, .do-bt.underline.active i:before {
-  font-weight: 500;
-  color: var(--main-color);
-}
-.do-bt.underline:hover:before {
-  opacity: 1;
-  transform: scaleX(1);
-  transform-origin: top left;
-}
-.do-div.transparent {
-  background-color: transparent;
-}
-.do-div.crop {
-  overflow: hidden;
-}
-.do-div.z-before {
-  z-index: -1;
-}
-.do-div.z-after {
-  z-index: 1;
-}
-.do-div.line {
-  background-color: transparent;
-  border: 1px solid black;
-}
-.do-div.square {
-  position: relative;
-}
-.do-div.square:before {
-  display: block;
-  content: "";
-  width: 100%;
-  padding-top: 100%;
-}
-.do-div.square > .content {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-}
-.do-div.square > .content.gutter {
-  top: 15px;
-  left: 15px;
-  width: calc(100% - 30px);
-  height: calc(100% - 30px);
-}
-.do-div.circle {
-  position: relative;
-  border-radius: 100%;
-}
-.do-div.circle:before {
-  display: block;
-  content: "";
-  width: 100%;
-  padding-top: 100%;
-}
-.do-div.circle > .content {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-}
-.do-div.circle > .content.gutter {
-  top: 15px;
-  left: 15px;
-  width: calc(100% - 30px);
-  height: calc(100% - 30px);
-}
-.do-div.circle.focus:after {
-  border-radius: 100%;
-}
-.do-div.focus:after {
-  content: "";
-  z-index: 0;
-  display: block;
-  pointer-events: none;
-  position: absolute;
-  top: 0rem !important;
-  left: 0rem !important;
-  width: calc(100% + 0rem);
-  height: calc(100% + 0rem);
-  transform-origin: center;
-  opacity: 0.3;
-  border: 1px solid black;
-}
-
-a.decoration-underline {
-  text-decoration: underline;
-}
-
 input {
   transition-property: background-color, color;
   transition-duration: 0.25s;
@@ -20226,25 +20020,20 @@ input.no-focus:focus {
   filter: none;
 }
 
-.o-half {
-  opacity: 0.5;
-}
-.o-half:hover {
-  opacity: 1;
+.blend-color {
+  mix-blend-mode: color;
 }
 
-.fc {
-  display: flex;
-  align-items: center !important;
-  justify-content: center !important;
+.bg-center {
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-.db {
-  display: block;
-}
-
-.dib {
-  display: inline-block;
+.bg-top-center {
+  background-position: 50% -10rem;
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
 
 html {
